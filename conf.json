@@ -1,10 +1,10 @@
 {
   "targets": [
     {
-      "master": "https://DESKTOP-6BE9TL4/svn/test/trunk",
+      "master": "https://localhost/svn/test/trunk",
       "branchfrom": "",
       "user": "zhongpan",
-      "password": "welcome",
+      "password": "xxxxxx",
       "cmd": "svn",
       "options": [
         "log",
@@ -20,7 +20,7 @@
   "mail": {
     "host": "smtp.fiberhome.com",
     "user": "unm2000@fiberhome.com",
-    "password": "test2013",
+    "password": "xxxxxx",
     "port": 465,
     "secure": true,
     "maxconnections": 5,
