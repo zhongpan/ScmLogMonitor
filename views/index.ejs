@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LMS</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrapv4/css/bootstrap.css">
+    <link href="/google-code-prettify/prettify.css" rel="stylesheet" />
+</head>
+
+<body onload="prettyPrint();">
+
+    <nav class="navbar navbar-light bg-faded">
+        <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/changelog">提交日志</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/stat">统计</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">配置</a>
+            </li>
+        </ul>
+    </nav>
+    <p></p>
+
+
+    <h5><b>语法格式</b></h5>
+    {强制提交}&lt;操作类型&gt;&lt;注释&gt;{其他属性}，具体如下：
+    <pre>{[qztj]}&lt;[bug fix|build fix|review fix|new feature|optimize|close feature|merge|maintance|migrate]&gt;&lt;comment&gt;
+{[from=url,rev=rev]}
+{[compatible=true|false]}
+{[author=realuser]}
+{[issue issueno]}</pre>
+    <h6><b>说明：</b></h6>
+    <ol>
+        <li>&lt;&gt;内是必选项；{}内是可选项；|表示选择其中之一。</li>
+        <li>qztj：强制提交只能用在第三方代码或移植代码，其他情况禁止使用强制提交。</li>
+        <li>操作类型：bug fix|build fix|review fix|new feature|optimize|close feature|
+            merge|maintance|migrate，一次提交只能是上述类型中的一种。
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="140">操作类型</th>
+                        <th>说明</th>
+                        <th>日志举例</th>
+                    </tr>
+                    <tr>
+                        <td>bug fix(修复缺陷) </td>
+                        <td>适用于修复软件代码的逻辑错误，包含修复软件代码，软件脚本，第三方软件等。</td>
+                        <td>[bug fix]修复LMS2E_OTN单盘面板端口下ODU2逻辑端口的显示名称错误的问题。<br />issue 1072577</td>
+                    </tr>
+                    <tr>
+                        <td>build fix(修复构建) </td>
+                        <td>适用于修正构建过程中的缺陷，包含编译错误，打包错误等。</td>
+                        <td>[build fix]修复unmplatformapi模块unmapi_alarm.cpp文件编译错误。</td>
+                    </tr>
+                    <tr>
+                        <td>review fix(代码审查修复)</td>
+                        <td>适用于修复在代码审查过程中发现的缺陷场景。</td>
+                        <td>[review fix]修复判断用户退出时清除踢线规则的逻辑。<br />issue 123456</td>
+                    </tr>
+                    <tr>
+                        <td>new feature(新增功能) </td>
+                        <td>适用于所有新功能开发，包含对软件代码，软件脚本，第三方软件的增加，删除，修改。</td>
+                        <td>[new feature]unmutils库日志模块新增支持写入指定文件大小，指定备份数量的日志文件功能。<br />[compatible=false]<br />issue
+                            12345</td>
+                    </tr>
+                    <tr>
+                        <td>optimize(优化功能) </td>
+                        <td>适用于对原有功能的优化过程，包含对软件代码，软件脚本，第三方软件的增加，删除，修改。
+                            适用于代码重构，原有接口变更等场景。</td>
+                        <td>[optimize]优化otnm_manager轮询效率。</td>
+                    </tr>
+                    <tr>
+                        <td>merge(合并功能) </td>
+                        <td>从另一版本分支上合并过来的软件代码，软件脚本，第三方软件的变更。
+                            仅用于积累一定时间的大规模合并，这是不推荐的操作类型，一般建议完成某个特性或修正某个Bug就立即合并，合并目的版本的日志操作类型同合并源。</td>
+                        <td>[merge]合并R0106版本代码到当前版本。<br />[from=http://10.78.13.228/svn/unm2000develop/UNM2000_V1.R01.06Series,rev=7842,7843-7855,7862]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>close feature(关闭功能) </td>
+                        <td>适用于在开发过程中，关闭原有功能的情况。</td>
+                        <td>[close feature]在unmplatformapi模块中取消以UNMAPI_AlarmQueryCodition作为查询条件接口GetAlarmList。</td>
+                    </tr>
+                    <tr>
+                        <td>maintance(代码维护) </td>
+                        <td>适用于不影响代码逻辑的修改场景，如：1）调整代码目录；2）增加代码注释；
+                            3）修改格式以通过编码规范检查；4）删除无用代码等。</td>
+                        <td>[maintance]调整统一端口头文件代码目录到$UNM_ROOT/Platform/include。</td>
+                    </tr>
+                    <tr>
+                        <td>migrate(代码迁移) </td>
+                        <td>适用于移植其他系统中的功能代码情况。</td>
+                        <td>[migrate]移植otnm_locatesrc到unmmanager模块。<br />[author=xxx]</td>
+                    </tr>
+                </table>
+            </div>
+        </li>
+        <li>comment：注释内容，可以多行，清晰简要说明本次提交。</li>
+        <li>from=url,rev=rev：from表示从哪个版本合并，格式为版本目录的http完整路径，
+            rev表示合并的版本号，格式如5,6,8-10,12。当操作类型为merge时必须，其他操作类型可选。单独一行。</li>
+        <li>compatible：前向兼容标记默认不填，表示修改前向兼容；当设置了[compatible=false]时
+            表示修改的代码不能前向兼容原逻辑。单独一行。</li>
+        <li>author：如果是用pqaunm2000提交，需要在[author=realuser]指定真实的用户名。单独一行。</li>
+        <li>issuse：操作类型为bug fix时，必须有关联的Mantis Case号。对于没有case号的情况，
+            需要在Mantis上建立相应Case；对于有路标case的new feature提交代码时也必须填写issuse号。
+            对于review fix的情况，issuse号填写代码审查的reviewid。单独一行。</li>
+    </ol>
+
+    <h5><b>语法格式的正则表达式</b></h5>
+    <pre class="prettyprint linenums"><code class="language-javascript">
+var reStr = "^(\\[qztj\\])?\\[(bug fix|build fix|review fix|new feature|optimize|close feature|merge|maintance|migrate)\\]" +
+        "([\\s\\S]+?)(?=(?:\\n\\[from=|\\n\\[compatible=|\\n\\[author=|\\nissue |\\s*$))" +
+        "(?:\\n\\[from=(http://.+),rev=((?:(?:\\d+|\\d+-\\d+)\\,)*(?:\\d+|\\d+-\\d+))\\])?" +
+        "(?:\\n\\[compatible=(true|false)\\])?" +
+        "(?:\\n\\[author=(\\w+)\\])?" +
+        "(?:\\nissue (\\d+))?" +
+        "(?:[\\s\\S]*$)";
+var re = new RegExp(reStr, "i");</code></pre>
+    <div>
+        <fieldset class="form-group row">
+            <label for="msg" class="col-sm-6">输入日志：</label>
+            <label for="result" class="col-sm-6">结果：</label>
+        </fieldset>
+        <fieldset class="form-group row">
+            <div class="col-sm-6"><textarea class="form-control" id="msg" rows="10"></textarea></div>
+            <div class="col-sm-6"><textarea class="form-control" id="result" rows="10"></textarea></div>
+        </fieldset>
+    </div>
+
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrapv4/js/bootstrap.js"></script>
+    <script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        var reStr = "^(\\[qztj\\])?\\[(bug fix|build fix|review fix|new feature|optimize|close feature|merge|maintance|migrate)\\]" +
+            "([\\s\\S]+?)(?=(?:\\n\\[from=|\\n\\[compatible=|\\n\\[author=|\\nissue |\\s*$))" +
+            "(?:\\n\\[from=(http://.+),rev=((?:(?:\\d+|\\d+-\\d+)\\,)*(?:\\d+|\\d+-\\d+))\\])?" +
+            "(?:\\n\\[compatible=(true|false)\\])?" +
+            "(?:\\n\\[author=(\\w+)\\])?" +
+            "(?:\\nissue (\\d+))?" +
+            "(?:[\\s\\S]*$)";
+        var re = new RegExp(reStr, "i");
+        function getDetail(logData) {
+            if (!logData.message) {
+                logData.message = "";
+            }
+            var result = logData.message.match(re);
+            if (result) {
+                logData.iserror = 0;
+                if (logData.author === "pqaunm2000") {
+                    if (result[7] == undefined) {
+                        logData.iserror = 1;
+                        return;
+                    } else {
+                        logData.realauthor = result[7];
+                    }
+                }
+                logData.type = result[2];
+                if (logData.type === "merge") {
+                    if (result[4] == undefined || result[5] == undefined) {
+                        logData.iserror = 1;
+                        logData.type = null;
+                        return;
+                    } else {
+                        logData.mergefrom = result[4];
+                        logData.mergerev = result[5];
+                    }
+                }
+                if (result[1]) {
+                    logData.isqztj = 1;
+                }
+                logData.message = result[3];
+                if (result[6]) {
+                    logData.iscompatible = result[6] == "true" ? 1 : 0;
+                }
+                if (result[8]) {
+                    logData.issueno = result[8];
+                }
+            } else {
+                logData.iserror = 1;
+            }
+        }
+        $('#msg').bind('input propertychange', function () {
+            var logData = {};
+            logData.message = $(this).val();
+            getDetail(logData);
+            var result = JSON.stringify(logData, null, "\t");
+            result = logData.iserror ? "非法！\n" + result : "合法！\n" + result;
+            $('#result').html(result);
+            if (logData.iserror) {
+                $('#result').css("color", "red");
+            } else {
+                $('#result').css("color", "blue");
+            }
+        });
+    </script>
+</body>
+
+</html>

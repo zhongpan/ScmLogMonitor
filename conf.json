@@ -1,0 +1,42 @@
+{
+  "targets": [
+    {
+      "master": "https://DESKTOP-6BE9TL4/svn/test/trunk",
+      "branchfrom": "",
+      "user": "zhongpan",
+      "password": "welcome",
+      "cmd": "svn",
+      "options": [
+        "log",
+        "--xml",
+        "-v",
+        "--stop-on-copy"
+      ],
+      "to": "HEAD",
+      "from": "1",
+      "publicuser": "pqaunm2000"
+    }
+  ],
+  "mail": {
+    "host": "smtp.fiberhome.com",
+    "user": "unm2000@fiberhome.com",
+    "password": "test2013",
+    "port": 465,
+    "secure": true,
+    "maxconnections": 5,
+    "maxmessages": 10,
+    "sendtomapping": {
+      "yzhang": "yongzhang"
+    }
+  },
+  "homepage": "http://127.0.0.1:3000",
+  "issueurls": {
+    "bug": "http://10.78.13.168/tdmantis/view.php?id=",
+    "review": "http://10.78.13.188/go?page=ReviewDisplay&reviewid=",
+    "feature": "http://10.78.13.168/InformationPlatform/guidepostCommon/viewGuidepostObject?viewObjectType=FUNCTION&viewObjectId="
+  },
+  "db": {
+    "name": "data.db3"
+  },
+  "cornscheduler": "* * 12,24 * * ?"
+}
