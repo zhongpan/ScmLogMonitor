@@ -6,6 +6,7 @@ ScmLogMonitor是采用nodejs实现的一个B/S系统，专注于对版本管理�
 
 # 使用方法
 ## 修改配置文件
+conf.json
 ```json
 {
   "targets": [
