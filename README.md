@@ -10,3 +10,9 @@ npm install
 npm start
 
 # 截图
+* 首页
+![index](https://github.com/zhongpan/ScmLogMonitor/blob/master/screenshots/index.png)
+* 提交日志
+![changelog](https://github.com/zhongpan/ScmLogMonitor/blob/master/screenshots/changelog.png)
+* 统计
+![stat](https://github.com/zhongpan/ScmLogMonitor/blob/master/screenshots/stat.png)
