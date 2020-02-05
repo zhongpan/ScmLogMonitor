@@ -11,8 +11,8 @@ npm start
 
 # 截图
 * 首页
-![index](https://raw.githubusercontent.com/zhongpan/ScmLogMonitor/master/screenshots/index.png)
+![index](https://github.com/zhongpan/ScmLogMonitor/blob/master/screenshots/index.png)
 * 提交日志
-![changelog](https://raw.githubusercontent.com/zhongpan/ScmLogMonitor/master/screenshots/changelog.png)
+![changelog](https://github.com/zhongpan/ScmLogMonitor/blob/master/screenshots/changelog.png)
 * 统计
-![stat](https://raw.githubusercontent.com/zhongpan/ScmLogMonitor/master/screenshots/stat.png)
+![stat](https://github.com/zhongpan/ScmLogMonitor/blob/master/screenshots/stat.png)
